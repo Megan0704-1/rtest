@@ -25,7 +25,7 @@ This repository and tooling was initally developed as a collaboration between [B
     ```
 2. To build and run the test examples:
     ```
-    colcon build && colcon test --packages-select rtest_examples --event-handlers console_cohesion+
+    colcon build && colcon test --packages-select rtest_examples --event-handlers console_cohesion+ --ctest-args --rerun-failed --output-on-failure
     ```
 
 ## Adding Testing Support to Your Package
