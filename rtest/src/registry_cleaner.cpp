@@ -16,7 +16,12 @@
 // @date      2025-06-21
 
 #include "rtest/registry_cleaner.hpp"
+#include "rtest/static_registry.hpp"
 
-namespace rtest {
-  static MockRegistryCleanerRegistrar g_mock_registry_cleaner_registrar;
-} // namespace rtest
+namespace rtest
+{
+void MockRegistryCleaner::OnTestSuiteEnd(const ::testing::TestSuite &)
+{
+  StaticMocksRegistry::instance().reset();
+}
+}  // namespace rtest

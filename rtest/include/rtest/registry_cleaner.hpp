@@ -17,24 +17,15 @@
 
 #pragma once
 #include <gtest/gtest.h>
-#include "rtest/static_registry.hpp"
 
-namespace rtest {
+namespace rtest
+{
 /**
  * Listens to Google-Test events and wipes the static mock registry
- * after each test-suite finishes
+ * after each test-suite finishes.
  */
-class MockRegistryCleaner final : public ::testing::EmptyTestEventListener {
-  void OnTestSuiteEnd(const ::testing::TestSuite&) override {
-    StaticMocksRegistry::instance().reset();
-  }
+class MockRegistryCleaner final : public ::testing::EmptyTestEventListener
+{
+  void OnTestSuiteEnd(const ::testing::TestSuite &) override;
 };
-
-struct MockRegistryCleanerRegistrar {
-  MockRegistryCleanerRegistrar() {
-    auto& listeners = ::testing::UnitTest::GetInstance()->listeners();
-    listeners.Append(new MockRegistryCleaner());
-  }
-};
-} // namespace rtest
-
+}  // namespace rtest
