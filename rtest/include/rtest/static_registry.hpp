@@ -32,6 +32,7 @@
 #include <boost/type_index.hpp>
 
 #include <rtest/single_instance.hpp>
+#include <rtest/registry_cleaner.hpp>
 
 namespace rclcpp
 {
@@ -429,8 +430,25 @@ public:
       lazy_init_action_servers_.end());
   }
 
+  void reset()
+  {
+    publishersRegistry_.clear();
+    subscriptionsRegistry_.clear();
+    timersRegistry_.clear();
+    servicesRegistry_.clear();
+    serviceClientsRegistry_.clear();
+    actionServersRegistry_.clear();
+    actionClientsRegistry_.clear();
+    mockRegistry_.clear();
+    lazy_init_action_clients_.clear();
+    lazy_init_action_servers_.clear();
+  }
+
 private:
-  StaticMocksRegistry() {}
+  StaticMocksRegistry()
+  {
+    ::testing::UnitTest::GetInstance()->listeners().Append(new MockRegistryCleaner());
+  }
 
   static StaticMocksRegistry theRegistry_;
 

@@ -62,6 +62,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(rtest_common SHARED
   src/static_registry.cpp
   src/logger_mock.cpp
+  src/registry_cleaner.cpp
 )
 add_library(${PROJECT_NAME}::rtest_common ALIAS rtest_common)
 set_property(TARGET rtest_common PROPERTY POSITION_INDEPENDENT_CODE ON)
